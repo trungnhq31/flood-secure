@@ -1,5 +1,11 @@
 package com.example.prm392_flood_secure.data.remote;
 
+import com.example.prm392_flood_secure.domain.model.Category;
+import com.example.prm392_flood_secure.domain.model.LoginRequest;
+import com.example.prm392_flood_secure.domain.model.LoginResponse;
+import com.example.prm392_flood_secure.domain.model.SystemConfig;
+import com.example.prm392_flood_secure.domain.model.UpdateRoleRequest;
+import com.example.prm392_flood_secure.domain.model.User;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -13,7 +19,7 @@ public interface ApiService {
     
     // AUTH
     @POST("api/auth/login")
-    Call<BaseResponse<Object>> login(@Body Object loginRequest);
+    Call<BaseResponse<LoginResponse>> login(@Body LoginRequest loginRequest);
     
     @POST("api/auth/register")
     Call<BaseResponse<Object>> register(@Body Object registerRequest);
@@ -44,4 +50,22 @@ public interface ApiService {
     
     @GET("api/notifications/unread-count")
     Call<BaseResponse<Object>> getUnreadNotificationCount();
+
+    // ADMIN
+    @GET("api/users")
+    Call<BaseResponse<List<User>>> getUsers(
+        @Query("page") int page,
+        @Query("limit") int limit,
+        @Query("search") String search,
+        @Query("role") String role
+    );
+
+    @PATCH("api/users/{id}/role")
+    Call<BaseResponse<User>> updateUserRole(@Path("id") String id, @Body UpdateRoleRequest body);
+
+    @GET("api/categories")
+    Call<BaseResponse<List<Category>>> getCategories();
+
+    @GET("api/system/config")
+    Call<BaseResponse<List<SystemConfig>>> getSystemConfig();
 }

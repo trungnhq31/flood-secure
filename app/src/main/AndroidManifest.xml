@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
+        android:name=".MyApplication"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -25,6 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.admin.AdminActivity" />
+        <activity android:name=".ui.admin.user.AdminUserListActivity" />
+        <activity android:name=".ui.admin.category.AdminCategoriesActivity" />
+        <activity android:name=".ui.admin.config.AdminConfigActivity" />
     </application>
 
 </manifest>
